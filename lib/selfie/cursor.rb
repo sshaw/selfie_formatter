@@ -7,15 +7,11 @@ module Selfie
     def initialize(output)
       raise ArgumentError, "output must be a terminal" unless output.tty?
       @output = output
+      @settings = `stty -g 2>/dev/null`
     end
 
-    %w[up down forward back].each do |name|
-      define_method(name) { |n| @output << super(n) }
-    end
-
-    %w[hide show].each do |name|
-      # Explicitly calling super with 0 args is required
-      define_method(name) { @output << super() }
+    %w[up down forward back move_to hide show clear_screen].each do |name|
+      define_method(name) { |*n| @output << super(*n) }
     end
 
     # Calculates how many columns and rows the code in the given block moved the cursor
@@ -32,7 +28,6 @@ module Selfie
     end
 
     def position
-      # TODO: save and restore original settings
       # TODO: use terminos instead?
       `stty -echo -icanon -cread`
       @output << current
@@ -48,7 +43,7 @@ module Selfie
       [ $1.to_i, $2.to_i ]
     ensure
       # TODO: restore if killed..?
-      `stty echo icanon cread`
+      `stty -g #@settings`
     end
   end
 end

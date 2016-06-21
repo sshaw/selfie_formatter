@@ -14,7 +14,7 @@ class SelfieFormatter
   RSpec::Core::Formatters.register self, :dump_summary, :dump_failures, :dump_pending, :close, :example_passed, :example_failed, :example_pending, :start, :stop
 
   def self.output_directory
-    @output_directory ||= File.join(Dir.pwd, "selfies")
+    @output_directory ||= RSpec.configuration.selfie_output_directory || File.join(Dir.pwd, "selfies")
   end
 
   def self.output_directory=(path)
@@ -40,13 +40,13 @@ class SelfieFormatter
 
     @main_img_height = nil
     @main_img_width = nil
-    @thumb_img_height = nil
-    @thumb_img_width = nil
   end
 
   def start(notification)
     @camera.on
     @cursor.hide
+    @cursor.clear_screen
+    @cursor.move_to(0, 0)
   end
 
   def stop(notification)
@@ -62,8 +62,8 @@ class SelfieFormatter
   end
 
   def close(n)
-    @output.puts
     @cursor.show
+    @output.flush
   end
 
   def example_passed(notification)
@@ -185,3 +185,5 @@ class SelfieFormatter
     end
   end
 end
+
+RSpec.configuration.add_setting :selfie_output_directory

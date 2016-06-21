@@ -4,6 +4,8 @@ module Selfie
 
     def initialize(outdir, options = {})
       @outdir = outdir
+      @glob = File.join(@outdir, "snapshot-*.jpg")
+      @captured = []
       @pid = nil
     end
 
@@ -35,13 +37,25 @@ module Selfie
         # kill, wait cannot find pid
       end
 
+      # final cleanup
+      FileUtils.rm_f(Dir[@glob] - @captured)
+
       @pid = nil
       true
     end
 
+    # Some hacks to make it seem like capture() takes a picture
+    # without accumulating a ton of unused images.
     def capture
       sleep 0.2
-      Dir[ File.join(@outdir, "snapshot-*.jpg") ].last
+
+      images = Dir[@glob]
+      return if images.none? || images.last == @captured.last
+
+      @captured << images.last
+      FileUtils.rm_f(images - @captured)
+
+      @captured.last
     end
   end
 end

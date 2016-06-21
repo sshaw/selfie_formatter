@@ -2,9 +2,9 @@
 
 An RSpec Formatter for the new generation of programmers.
 
-![Selfie Formatter](example.gif)
+![Selfie Formatter Animation](example.gif)
 
-Selfie Formatter takes photos of you while your tests run and uses them to track
+The Selfie Formatter takes photos of you while your tests run and uses them to track
 progress and format the results.
 
 Currently only works on OS X with iTerm2 >= 3.0. Also see [known issues](#known-issues).
