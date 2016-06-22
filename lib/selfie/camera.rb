@@ -1,6 +1,6 @@
 module Selfie
   class Camera
-    CAPTURE_COMMAND = File.expand_path("../../imagesnap", __FILE__) << " -qw 0.8 -t 0.2"
+    CAPTURE_COMMAND = File.expand_path("../../imagesnap", __FILE__) << " -qw 0.8 -t 0.3"
 
     def initialize(outdir, options = {})
       @outdir = outdir

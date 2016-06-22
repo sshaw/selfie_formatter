@@ -1,3 +1,5 @@
+require "rspec"
+
 # This is needed by the Reporter. RSpec doesn't require it.
 require "rspec/core/formatters/console_codes"
 
@@ -151,6 +153,8 @@ class SelfieFormatter
       # for 32 point
       #i.annotate "+15+40", "#1000"
     end
+  rescue MiniMagick::Error => e
+    raise Error, "image transformation failed: #{e}"
   end
 
   def display_progess(image)
