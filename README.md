@@ -37,6 +37,9 @@ rspec -f SelfieFormatter
 
 ## Known Issues
 
+1. Slower tests. Yes, vanity has its price: the camera takes time to warm up, and a small sleep time is added prior to taking the each photo. At some point the sleep time
+may be added as an option.
+
 1. Photos are taken via [imagesnap](https://github.com/rharder/imagesnap), which is a fine program but can quickly eat up memory.
 Upwards of 500 MB after 10 or 15 seconds.
 
