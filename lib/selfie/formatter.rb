@@ -139,19 +139,15 @@ module Selfie
 
     def transform(path, color)
       # TODO: options
-      # TODO: put number in a white box
       image = MiniMagick::Image.new(path)
       image.combine_options do |i|
         i.resize "250x250>"
         i.border "4x4"
         i.bordercolor color
-        i.pointsize '26'
-        i.weight 'Bold'
-        # for 26 point
-        # count isn't available on Notification -of something?!
-        i.annotate "+10+30", @spec_count.to_s
-        # for 32 point
-        #i.annotate "+15+40", "#1000"
+        i.pointsize "26"
+        i.weight "bold"
+        i.undercolor "white"
+        i.annotate "+4+28", @spec_count.to_s
       end
     rescue MiniMagick::Error => e
       raise Error, "image transformation failed: #{e}"

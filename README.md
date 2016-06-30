@@ -46,8 +46,6 @@ Upwards of 500 MB after 10 or 15 seconds.
 1. Photos are taken every 300ms. Unused photos are cleaned up after every test completes but if a single test takes a while to
 complete photos can start to eat up disk space.
 
-1. Spec numbers are added to the top left of each image. They will not show up if the background is dark.
-
 At some point I may write something that does not [fake the `Camera` interface via `fork`](https://github.com/sshaw/selfie_formatter/blob/34f1999391695ce7633d79638a0903e1eb612e9e/lib/selfie/camera.rb). [imagesnap](https://github.com/rharder/imagesnap) and [CaptureCamera](https://github.com/fernyb/CaptureCamera) are good starting points.
 
 ## License
