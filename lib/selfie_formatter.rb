@@ -1,12 +1,7 @@
-require "selfie"
+require "selfie/rspec"
 
-def supported_terminal?
-  v = ENV["TERM_PROGRAM_VERSION"]
-  !!(v && ENV["TERM_PROGRAM"] == "iTerm.app" && v.split(".").first.to_i >= 3)
-end
-
-if supported_terminal?
-  SelfieFormatter = Selfie::Formatter
+if Selfie.supported_terminal?
+  SelfieFormatter = Selfie::RSpec
 else
   require "rspec/core/formatters"
 
